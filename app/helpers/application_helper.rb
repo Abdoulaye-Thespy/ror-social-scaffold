@@ -15,4 +15,14 @@ module ApplicationHelper
       link_to('Like!', post_likes_path(post_id: post.id), method: :post)
     end
   end
+
+  def friendship(ids)
+    friend=User.find_by_id(ids)
+    friendship = Friendship.find_by(user: current_user, friend: friend)
+    if friendship.nil?
+     link_to('Send Friend request', new_user_friendship_path(ids))
+    elsif friendship.confirmed==false
+     link_to('Friend request sent', new_user_friendship_path(ids)) 
+    end
+  end
 end
