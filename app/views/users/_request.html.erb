@@ -1,0 +1,14 @@
+<section class="users-section">
+  <ul class="users-list">
+    <% @requested_friends.each do |user| %>
+      <li>
+        Name: <%= user.name %> 
+        <span class="profile-link">
+
+          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+          <%= friendship(user.id) %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+</section>

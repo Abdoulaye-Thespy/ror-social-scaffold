@@ -1,12 +1,74 @@
 <section class="users-section">
   <ul class="users-list">
     <% @users.each do |user| %>
+
+    <%if user.id != current_user.id %>
       <li>
         Name: <%= user.name %> 
         <span class="profile-link">
 
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
           <%= friendship(user.id) %>
+        </span>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+
+</section><h1>My friends</h1>
+
+<section class="users-section">
+  <ul class="users-list">
+    <% if !@friends.nil? %>
+    <% @friends.each do |user| %>
+      <li>
+        <p></p>
+        Name: <%= user.name %> 
+        <span class="profile-link">
+
+          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+          <span class= "button is-success"> friends</span>
+          <%= destroy_friendship(user.id) %>
+        </span>
+      </li>
+    <% end %>
+    <% end %>
+  </ul>
+</section>
+
+
+<h1>User's to whom I sent request to be friend</h1>
+
+<section class="users-section">
+  <ul class="users-list">
+    <% @pend_friends.each do |user| %>
+      <li>
+        Name: <%= user.name %> 
+        <span class="profile-link">
+
+          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+       <span class= "button is-warning"> Invitation sent</span>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+
+
+<h1>User's who have requested to be friend</h1>
+
+<section class="users-section">
+  <ul class="users-list">
+    <% @req_friends.each do |user| %>
+      <li>
+        <p></p>
+        Name: <%= user.name %> 
+        <span class="profile-link">
+
+          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+         <%= link_to 'Accept invitation', new_user_friendship_path(user.id), class: 'button is-link' %>
         </span>
       </li>
     <% end %>

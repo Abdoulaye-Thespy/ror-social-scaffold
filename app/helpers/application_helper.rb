@@ -19,10 +19,18 @@ module ApplicationHelper
   def friendship(ids)
     friend=User.find_by_id(ids)
     friendship = Friendship.find_by(user: current_user, friend: friend)
-    if friendship.nil?
+    inverse_friendship = Friendship.find_by(user: friend , friend: current_user)
+    if friendship.nil? && inverse_friendship.nil?
      link_to('Send Friend request', new_user_friendship_path(ids))
-    elsif friendship.confirmed==false
-     link_to('Friend request sent', new_user_friendship_path(ids)) 
     end
+  end
+
+
+  def destroy_friendship(ids)
+    friend=User.find_by_id(ids)
+    friendship = Friendship.find_by(user: current_user, friend: friend)
+    inverse_friendship = Friendship.find_by(user: friend , friend: current_user)
+    link_to('delete friendship!', user_friendship_path(friend.id, friendship.id), method: :delete) unless friendship.nil?
+    link_to('delete friendship!', user_friendship_path(friend.id, inverse_friendship.id), method: :delete) unless inverse_friendship.nil?
   end
 end
