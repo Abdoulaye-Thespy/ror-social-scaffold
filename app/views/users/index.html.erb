@@ -8,7 +8,8 @@
         <span class="profile-link">
 
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
-          <%= friendship(user.id) %>
+         
+          <span class=" button is-link">  <%= friendship(user.id) %></span>
         </span>
       </li>
       <% end %>
@@ -29,7 +30,7 @@
 
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
           <span class= "button is-success"> friends</span>
-          <%= destroy_friendship(user.id) %>
+          <span class=" button is-danger"><%= destroy_friendship(user.id) %> </span>
         </span>
       </li>
     <% end %>
@@ -50,7 +51,8 @@
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
        <span class= "button is-warning"> Invitation sent</span>
 
-       <%= destroy_friend_request(user.id) %>
+      
+       <span class=" button is-danger"> <%= destroy_friend_request(user.id) %></span>
         </span>
       </li>
     <% end %>
@@ -71,7 +73,8 @@
 
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
          <%= link_to 'Accept invitation', new_user_friendship_path(user.id), class: 'button is-link' %>
-         <%= refuse_friend_request(user.id)%>
+        
+         <span class=" button is-danger">  <%= refuse_friend_request(user.id)%></span>
         </span>
       </li>
     <% end %>

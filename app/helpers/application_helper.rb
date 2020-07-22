@@ -22,7 +22,6 @@ module ApplicationHelper
     inverse_friendship = Friendship.find_by(user: friend, friend: current_user)
     if friendship.nil? && inverse_friendship.nil?
       link_to('Send Friend request', new_user_friendship_path(ids))
-
     else destroy_friend_request(friend.id)
     end
   end
@@ -34,9 +33,9 @@ module ApplicationHelper
     unless friendship.nil?
       link_to('delete friendship!', user_friendship_path(friend.id, friendship.id), method: :delete)
     end
-    unless inverse_friendship.nil?
-      link_to('delete friendship!', user_friendship_path(friend.id, inverse_friendship.id), method: :delete)
-    end
+    return if inverse_friendship.nil?
+
+    link_to('delete friendship!', user_friendship_path(friend.id, inverse_friendship.id), method: :delete)
   end
 
   def destroy_friend_request(ids)
@@ -45,11 +44,11 @@ module ApplicationHelper
     inverse_friendship = Friendship.find_by(user: friend, friend: current_user)
     unless inverse_friendship.nil?
       link_to('cancel friend_request!', user_friendship_path(friend.id, inverse_friendship.id), method: :delete)
-      end
-    unless friendship.nil?
-      link_to('cancel friend_request!', user_friendship_path(friend.id, friendship.id), method: :delete)
-      end
-end
+    end
+    return if friendship.nil?
+
+    link_to('cancel friend_request!', user_friendship_path(friend.id, friendship.id), method: :delete)
+  end
 
   def refuse_friend_request(ids)
     friend = User.find_by_id(ids)
@@ -58,8 +57,8 @@ end
     unless friendship.nil?
       link_to('Refuse friend_request!', user_friendship_path(friend.id, friendship.id), method: :delete)
     end
-    unless inverse_friendship.nil?
-      link_to('Refuse friend_request!', user_friendship_path(friend.id, inverse_friendship.id), method: :delete)
-    end
+    return if inverse_friendship.nil?
+
+    link_to('Refuse friend_request!', user_friendship_path(friend.id, inverse_friendship.id), method: :delete)
   end
 end
