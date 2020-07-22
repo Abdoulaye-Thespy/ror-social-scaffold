@@ -29,31 +29,12 @@ class FriendshipsController < ApplicationController
       inv = Friendship.find_by(user: friend, friend:current_user)
       not_inv = Friendship.find_by(user: current_user, friend:friend)
     if inv || not_inv
-      inv.destroy
-      not_inv.destroy
+      inv.destroy unless inv.nil?
+      not_inv.destroy unless not_inv.nil?
       redirect_to users_path, notice: 'Friend request delete.'
     else
       redirect_to users_path, notice: 'you cannot delete this friend request.'
     end
   end
 
-
-  #  def create
-
-  #   if @like.save
-  #     redirect_to posts_path, notice: 'You liked a post.'
-  #   else
-  #     redirect_to posts_path, alert: 'You cannot like this post.'
-  #   end
-  # end
-
-  # def destroy
-  #   like = Like.find_by(id: params[:id], user: current_user, post_id: params[:post_id])
-  #   if like
-  #     like.destroy
-  #     redirect_to posts_path, notice: 'You disliked a post.'
-  #   else
-  #     redirect_to posts_path, alert: 'You cannot dislike post that you did not like before.'
-  #   end
-  # end
 end

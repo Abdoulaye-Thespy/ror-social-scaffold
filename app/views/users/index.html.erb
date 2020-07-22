@@ -38,7 +38,7 @@
 </section>
 
 
-<h1>User's to whom I sent request to be friend</h1>
+<h1>User's to whom I sent request to be friend!!!</h1>
 
 <section class="users-section">
   <ul class="users-list">
@@ -49,6 +49,8 @@
 
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
        <span class= "button is-warning"> Invitation sent</span>
+
+       <%= destroy_friend_request(user.id) %>
         </span>
       </li>
     <% end %>
@@ -69,6 +71,7 @@
 
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
          <%= link_to 'Accept invitation', new_user_friendship_path(user.id), class: 'button is-link' %>
+         <%= refuse_friend_request(user.id)%>
         </span>
       </li>
     <% end %>
