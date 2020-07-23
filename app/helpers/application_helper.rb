@@ -61,4 +61,8 @@ module ApplicationHelper
 
     link_to('Refuse friend_request!', user_friendship_path(friend.id, inverse_friendship.id), method: :delete)
   end
+
+  def user(user)
+    render users if user.id != current_user.id
+  end
 end

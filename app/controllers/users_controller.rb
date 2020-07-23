@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @users = User.all
+    @users = User.all.where('id != ?', current_user.id)
     @pend_friends = current_user.pending_friends
     @req_friends = current_user.friend_requests
     @friends = current_user.friends

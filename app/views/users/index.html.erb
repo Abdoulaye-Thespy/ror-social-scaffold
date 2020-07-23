@@ -1,9 +1,7 @@
 <section class="users-section">
   <ul class="users-list">
     <% @users.each do |user| %>
-
-    <%if user.id != current_user.id %>
-      <li>
+     <li>
         Name: <%= user.name %> 
         <span class="profile-link">
 
@@ -12,16 +10,14 @@
           <span class=" button is-link">  <%= friendship(user.id) %></span>
         </span>
       </li>
-      <% end %>
     <% end %>
   </ul>
+</section> 
 
-
-</section><h1>My friends</h1>
-
-<section class="users-section">
+<h1>My friends</h1>
+<%unless @friends.nil? %>
+ <section class="users-section">
   <ul class="users-list">
-    <% if !@friends.nil? %>
     <% @friends.each do |user| %>
       <li>
         <p></p>
@@ -34,10 +30,9 @@
         </span>
       </li>
     <% end %>
-    <% end %>
-  </ul>
-</section>
-
+    </ul>
+ </section>
+<% end %>
 
 <h1>User's to whom I sent request to be friend!!!</h1>
 
