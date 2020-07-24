@@ -16,6 +16,7 @@ module ApplicationHelper
     end
   end
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def friendship(user)
     if !@pend_friends.nil? && @pend_friends.include?(user)
       'invitation sent'
@@ -27,6 +28,7 @@ module ApplicationHelper
       link_to('Send Friend request', new_user_friendship_path(user.id))
     end
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def destroy_friendship(user)
     if !@pend_friends.nil? && @pend_friends.include?(user)
