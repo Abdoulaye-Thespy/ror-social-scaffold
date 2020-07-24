@@ -1,3 +1,4 @@
+
 AllCops:
   Exclude:
     - "db/**/*"
@@ -5,7 +6,6 @@ AllCops:
     - "config/**/*"
     - "Guardfile"
     - "Rakefile"
-    - "README.md"
     - "node_modules/**/*"
 
   DisplayCopNames: true
@@ -27,10 +27,7 @@ Metrics/ClassLength:
 Metrics/BlockLength:
   ExcludedMethods: ['describe']
   Max: 30
-Metrics/CyclomaticComplexity:
-  Max: 9
-Metrics/PerceivedComplexity:
-  Max: 9
+
 Style/Documentation:
   Enabled: false
 Style/ClassAndModuleChildren:
@@ -43,9 +40,6 @@ Style/DefWithParentheses:
   Enabled: false
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
-Lint/Void:
-  Enabled: false
-
 
 Layout/HashAlignment:
   EnforcedColonStyle: key
@@ -54,3 +48,13 @@ Layout/ExtraSpacing:
 Layout/MultilineMethodCallIndentation:
   Enabled: true
   EnforcedStyle: indented
+Lint/RaiseException:
+  Enabled: false
+Lint/StructNewOverride:
+  Enabled: false
+Style/HashEachMethods:
+  Enabled: false
+Style/HashTransformKeys:
+  Enabled: false
+Style/HashTransformValues:
+  Enabled: false
