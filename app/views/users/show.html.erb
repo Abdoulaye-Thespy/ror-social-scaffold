@@ -1,7 +1,8 @@
 <section class="user-section">
   <span class="title is-5"><%= "Name: #{@user.name}"  %> </span>  
 
-  <span class= "button is-warning"> <%= friendship(@user.id) %> </span>
+  <span class= "button is-warning"> <%= friendship(@user) %> </span>
+   <span class=" button is-danger"><%= destroy_friendship(@user.id) %> </span>
  
   <article class="timeline">
     <h3>Recent posts:</h3>

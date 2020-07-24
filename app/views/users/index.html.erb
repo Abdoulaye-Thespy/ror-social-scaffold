@@ -6,8 +6,9 @@
         <span class="profile-link">
 
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
-         
-          <span class=" button is-link">  <%= friendship(user.id) %></span>
+          <%= @friendship.user_id  unless @friendship.nil? %> 
+          <span class=" button is-link">  <%= friendship(user) %> </span>
+           <span class=" button is-danger">  <%= destroy_friendship(user) %> </span>
         </span>
       </li>
     <% end %>
@@ -26,6 +27,7 @@
 
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
           <span class= "button is-success"> friends</span>
+         <%= link_to('remove friend', user_friendship_path(user.id, user.id), class: 'button is-link', method: :delete) %>
           <span class=" button is-danger"><%= destroy_friendship(user.id) %> </span>
         </span>
       </li>
@@ -45,9 +47,7 @@
 
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
        <span class= "button is-warning"> Invitation sent</span>
-
-      
-       <span class=" button is-danger"> <%= destroy_friend_request(user.id) %></span>
+        <%= link_to('cancel request', user_friendship_path(user.id, user.id), class: 'button is-danger', method: :delete) %>
         </span>
       </li>
     <% end %>
@@ -68,8 +68,7 @@
 
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
          <%= link_to 'Accept invitation', new_user_friendship_path(user.id), class: 'button is-link' %>
-        
-         <span class=" button is-danger">  <%= refuse_friend_request(user.id)%></span>
+          <%= link_to('refuse request', user_friendship_path(user.id, user.id), class: 'button is-danger', method: :delete) %>
         </span>
       </li>
     <% end %>

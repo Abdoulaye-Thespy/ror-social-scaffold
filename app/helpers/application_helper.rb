@@ -16,53 +16,30 @@ module ApplicationHelper
     end
   end
 
-  def friendship(ids)
-    friend = User.find_by_id(ids)
-    friendship = Friendship.find_by(user: current_user, friend: friend)
-    inverse_friendship = Friendship.find_by(user: friend, friend: current_user)
-    if friendship.nil? && inverse_friendship.nil?
-      link_to('Send Friend request', new_user_friendship_path(ids))
-    else destroy_friend_request(friend.id)
+  def friendship(user)
+    if !@pend_friends.nil? && @pend_friends.include?(user)
+      return "invitation sent"
+    elsif !@req_friends.nil? && @req_friends.include?(user)
+      link_to 'Accept invitation', new_user_friendship_path(user.id)
+    elsif !@friends.nil? && @friends.include?(user)
+      return "friends"
+    else
+    link_to('Send Friend request', new_user_friendship_path(user.id))
     end
   end
 
-  def destroy_friendship(ids)
-    friend = User.find_by_id(ids)
-    friendship = Friendship.find_by(user: current_user, friend: friend)
-    inverse_friendship = Friendship.find_by(user: friend, friend: current_user)
-    unless friendship.nil?
-      link_to('delete friendship!', user_friendship_path(friend.id, friendship.id), method: :delete)
+  def destroy_friendship(user)
+     if !@pend_friends.nil? && @pend_friends.include?(user)
+     link_to('cancel request!', user_friendship_path(user.id, user.id), method: :delete)
+    elsif @req_friends.include?(user)
+      link_to('refuse request!', user_friendship_path(user.id, user.id), method: :delete)
+    elsif @friends.include?(user)
+      link_to('remove friend', user_friendship_path(user.id, user.id), method: :delete)
+    else
+      return " block this user"
     end
-    return if inverse_friendship.nil?
-
-    link_to('delete friendship!', user_friendship_path(friend.id, inverse_friendship.id), method: :delete)
+   
   end
 
-  def destroy_friend_request(ids)
-    friend = User.find_by_id(ids)
-    friendship = Friendship.find_by(user: current_user, friend: friend)
-    inverse_friendship = Friendship.find_by(user: friend, friend: current_user)
-    unless inverse_friendship.nil?
-      link_to('cancel friend_request!', user_friendship_path(friend.id, inverse_friendship.id), method: :delete)
-    end
-    return if friendship.nil?
 
-    link_to('cancel friend_request!', user_friendship_path(friend.id, friendship.id), method: :delete)
-  end
-
-  def refuse_friend_request(ids)
-    friend = User.find_by_id(ids)
-    friendship = Friendship.find_by(user: current_user, friend: friend)
-    inverse_friendship = Friendship.find_by(user: friend, friend: current_user)
-    unless friendship.nil?
-      link_to('Refuse friend_request!', user_friendship_path(friend.id, friendship.id), method: :delete)
-    end
-    return if inverse_friendship.nil?
-
-    link_to('Refuse friend_request!', user_friendship_path(friend.id, inverse_friendship.id), method: :delete)
-  end
-
-  def user(user)
-    render users if user.id != current_user.id
-  end
 end
