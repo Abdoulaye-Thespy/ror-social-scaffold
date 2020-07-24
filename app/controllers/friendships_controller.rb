@@ -12,6 +12,7 @@ class FriendshipsController < ApplicationController
     end
 
     return unless !@friendship.nil? || !@inverse_friendship.nil?
+
     friendship = Friendship.find_or_create_by(user: current_user, friend: @friend)
     inverse_friendship = Friendship.find_or_create_by(user: @friend, friend: current_user)
     friendship.confirmed = 1
@@ -33,5 +34,4 @@ class FriendshipsController < ApplicationController
       redirect_to users_path, notice: 'you cannot delete this friend request.'
     end
   end
-
 end
