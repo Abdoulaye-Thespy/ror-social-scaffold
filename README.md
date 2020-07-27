@@ -63,7 +63,6 @@ TBA
 
 ## Authors
 
-TBA
 
 ## 🤝 Contributing
 

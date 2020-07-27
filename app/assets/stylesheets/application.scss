@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+@import "bulma";
+
+a {
+  color: #000;
+}

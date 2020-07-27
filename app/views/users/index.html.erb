@@ -1,10 +1,74 @@
 <section class="users-section">
   <ul class="users-list">
     <% @users.each do |user| %>
-      <li>
-        Name: <%= user.name %>
+     <li>
+        Name: <%= user.name %> 
         <span class="profile-link">
+
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+          <%= @friendship.user_id  unless @friendship.nil? %> 
+          <span class=" button is-link">  <%= friendship(user) %> </span>
+           <span class=" button is-danger">  <%= destroy_friendship(user) %> </span>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+</section> 
+
+<h1>My friends</h1>
+<%unless @friends.nil? %>
+ <section class="users-section">
+  <ul class="users-list">
+    <% @friends.each do |user| %>
+      <li>
+        <p></p>
+        Name: <%= user.name %> 
+        <span class="profile-link">
+
+          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+          <span class= "button is-success"> friends</span>
+         <%= link_to('remove friend', user_friendship_path(user.id, user.id), class: 'button is-link', method: :delete) %>
+          <span class=" button is-danger"><%= destroy_friendship(user.id) %> </span>
+        </span>
+      </li>
+    <% end %>
+    </ul>
+ </section>
+<% end %>
+
+<h1>User's to whom I sent request to be friend!!!</h1>
+
+<section class="users-section">
+  <ul class="users-list">
+    <% @pend_friends.each do |user| %>
+      <li>
+        Name: <%= user.name %> 
+        <span class="profile-link">
+
+          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+       <span class= "button is-warning"> Invitation sent</span>
+        <%= link_to('cancel request', user_friendship_path(user.id, user.id), class: 'button is-danger', method: :delete) %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+
+
+<h1>User's who have requested to be friend</h1>
+
+<section class="users-section">
+  <ul class="users-list">
+    <% @req_friends.each do |user| %>
+      <li>
+        <p></p>
+        Name: <%= user.name %> 
+        <span class="profile-link">
+
+          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+         <%= link_to 'Accept invitation', new_user_friendship_path(user.id), class: 'button is-link' %>
+          <%= link_to('refuse request', user_friendship_path(user.id, user.id), class: 'button is-danger', method: :delete) %>
         </span>
       </li>
     <% end %>
