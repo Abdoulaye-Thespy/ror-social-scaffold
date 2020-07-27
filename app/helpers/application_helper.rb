@@ -32,7 +32,7 @@ module ApplicationHelper
 
   def destroy_friendship(user)
     if !@pend_friends.nil? && @pend_friends.include?(user)
-      link_to('cancel request!', user_friendship_path(user.id, user.id), method: :delete)
+      link_to('cancel request!', user_friendship_path(user.id, user.id), method: :post)
     elsif !@req_friends.nil? && @req_friends.include?(user)
       link_to('refuse request!', user_friendship_path(user.id, user.id), method: :delete)
     elsif @friends.include?(user)
