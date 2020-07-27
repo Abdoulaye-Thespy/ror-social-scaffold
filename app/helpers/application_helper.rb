@@ -12,7 +12,7 @@ module ApplicationHelper
     if like
       link_to('Dislike!', post_like_path(id: like.id, post_id: post.id), method: :delete)
     else
-      link_to('Like!', post_likes_path(post_id: post.id), method: :post)
+      link_to('Like!', post_likes_path(post_id: post.id), method: :post, data: { confirm: 'Cancel friendship?' })
     end
   end
 
@@ -32,11 +32,11 @@ module ApplicationHelper
 
   def destroy_friendship(user)
     if !@pend_friends.nil? && @pend_friends.include?(user)
-      link_to('cancel request!', user_friendship_path(user.id, user.id), method: :delete)
+      link_to('cancel request!', user_friendship_path(user.id, user.id), method: :post, data: { confirm: 'Cancel friendship?' })
     elsif !@req_friends.nil? && @req_friends.include?(user)
-      link_to('refuse request!', user_friendship_path(user.id, user.id), method: :delete)
+      link_to('refuse request!', user_friendship_path(user.id, user.id), method: :delete, data: { confirm: 'refuse friendship?' })
     elsif @friends.include?(user)
-      link_to('remove friend', user_friendship_path(user.id, user.id), method: :delete)
+      link_to('remove friend', user_friendship_path(user.id, user.id), method: :delete, data: { confirm: 'Remove friend?' })
     else
       ' block this user'
     end
@@ -44,11 +44,11 @@ module ApplicationHelper
 
   def destroy_request()
     if !@pend_friends.nil? && @pend_friends.include?(@user)
-      link_to('cancel request!', user_friendship_path(@user.id, @user.id), method: :delete)
+      link_to('cancel request!', user_friendship_path(@user.id, @user.id), method: :delete, data: { confirm: 'Cancel request?' })
     elsif !@req_friends.nil? && @req_friends.include?(@user)
-      link_to('refuse request!', user_friendship_path(@user.id, @user.id), method: :delete)
+      link_to('refuse request!', user_friendship_path(@user.id, @user.id), method: :delete, data: { confirm: 'Refuse request?' })
     elsif @friends.include?(@user)
-      link_to('remove friend', user_friendship_path(@user.id, @user.id), method: :delete)
+      link_to('remove friend', user_friendship_path(@user.id, @user.id), method: :delete, data: { confirm: 'Remove friend?' })
     else
       ' block this user'
     end
