@@ -11,8 +11,6 @@
 
 [Click for the Live demo](https://agile-island-86439.herokuapp.com/users/sign_in)
 
-TBA
-
 
 ## Getting Started
 
